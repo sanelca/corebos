@@ -10,7 +10,7 @@
                                 <abbr class="slds-required" title="required">* </abbr>{$MOD.LBL_MB_MODULENAME}
                             </label>
                             <div class="slds-form-element__control">
-                                <input type="text" id="modulename" placeholder="{$MOD.LBL_MB_MODULENAME}" onchange="mb.checkForModule(this.id);mb.updateProgress(1)" required="" class="slds-input" />
+                                <input type="text" id="modulename" placeholder="{$MOD.LBL_MB_MODULENAME}" onchange="mb.checkForModule(this.id);mb.updateProgress(1)" required="" class="slds-input" onkeypress="return blockSpecialChar(event)" onkeyup="return forceLower(this);"/>
                             </div>
                         </div>
                         <div class="slds-form-element">
