@@ -12,16 +12,14 @@
  * permissions and limitations under the License. You may obtain a copy of the License
  * at <http://corebos.org/documentation/doku.php?id=en:devel:vpl11>
  *************************************************************************************************/
- function blockSpecialChar(event) {
-	
+function blockSpecialChar(event) {
 	if(!((event.keyCode >= 65) && (event.keyCode <= 90) 
 	|| (event.keyCode >= 97) && (event.keyCode <= 122) 
-	|| (event.keyCode >= 48) && (event.keyCode <= 57)))
-	{
+	|| (event.keyCode >= 48) && (event.keyCode <= 57))) {
 		event.returnValue = false;
 		return;
-	 }
-	 event.returnValue = true;
+	}
+	event.returnValue = true;
 }
 function forceLower(strInput) {
 	strInput.value=strInput.value.toLowerCase();
