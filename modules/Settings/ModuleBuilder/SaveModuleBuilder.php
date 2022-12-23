@@ -13,7 +13,11 @@
 * permissions and limitations under the License. You may obtain a copy of the License
 * at <http://corebos.org/documentation/doku.php?id=en:devel:vpl11>
 *************************************************************************************************/
-
+function cleanModuleName($string = "") {
+	$string = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+	$string = str_replace(' ', '', $string);
+	return strtolower($string);
+}
 function SaveModuleBuilder($step) {
 	global $mod_strings,$adb, $current_user;
 	$moduleid = $_COOKIE['ModuleBuilderID'];
@@ -29,8 +33,8 @@ function SaveModuleBuilder($step) {
 			} else {
 				$mb = new ModuleBuilder();
 			}
-			$modulename = vtlib_purify($_REQUEST['modulename']);
-			$mb->column_data['modulename'] = str_replace(' ', '', $modulename);
+			
+			$mb->column_data['modulename'] = cleanModuleName(vtlib_purify($_REQUEST['modulename']));
 			$mb->column_data['modulelabel'] = vtlib_purify($_REQUEST['modulelabel']);
 			$mb->column_data['parentmenu'] = vtlib_purify($_REQUEST['parentmenu']);
 			$mb->column_data['moduleicon'] = vtlib_purify($_REQUEST['moduleicon']);
@@ -63,7 +67,7 @@ function SaveModuleBuilder($step) {
 				$moduleName = $data['name'];
 				$mb->column_data['modulename'] = $moduleName;
 				$mb->column_data['blockid'] = vtlib_purify($_REQUEST['fields'][0]['blockid']);
-				$mb->column_data['fieldname'] = vtlib_purify($_REQUEST['fields'][0]['fieldname']);
+				$mb->column_data['fieldname'] = cleanModuleName(vtlib_purify($_REQUEST['fields'][0]['fieldname']));
 				$mb->column_data['uitype'] = vtlib_purify($_REQUEST['fields'][0]['uitype']);
 				$mb->column_data['columnname'] = vtlib_purify($_REQUEST['fields'][0]['columnname']);
 				$mb->column_data['fieldlabel'] = vtlib_purify($_REQUEST['fields'][0]['fieldlabel']);

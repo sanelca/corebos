@@ -12,7 +12,20 @@
  * permissions and limitations under the License. You may obtain a copy of the License
  * at <http://corebos.org/documentation/doku.php?id=en:devel:vpl11>
  *************************************************************************************************/
-
+ function blockSpecialChar(event) {
+	
+	if(!((event.keyCode >= 65) && (event.keyCode <= 90) 
+	|| (event.keyCode >= 97) && (event.keyCode <= 122) 
+	|| (event.keyCode >= 48) && (event.keyCode <= 57)))
+	{
+		event.returnValue = false;
+		return;
+	 }
+	 event.returnValue = true;
+}
+function forceLower(strInput) {
+	strInput.value=strInput.value.toLowerCase();
+}
 loadJS('index.php?module=Settings&action=SettingsAjax&file=getjslanguage');
 const tuiGrid = tui.Grid;
 let url = 'index.php?module=Settings&action=SettingsAjax&file=BuilderFunctions';
@@ -977,6 +990,19 @@ const mb = {
 						</div>
 					</div>`;
 					break;
+				case 'fieldname':
+					fieldTemplate += `
+					<div class="slds-col" style="${inStyle.style}" id="${inStyle.id}">
+						<div class="slds-form-element">
+						<label class="slds-form-element__label" for="${textfields[key].value}_${FIELD_COUNT}">
+							<abbr class="slds-required" title="required">* </abbr> ${textfields[key].type}
+						</label>
+						<div class="slds-form-element__control">
+							<input type="text" name="${textfields[key].value}_${FIELD_COUNT}" placeholder="${inStyle.placeholder}" id="${textfields[key].value}_${FIELD_COUNT}" class="slds-input" onkeypress="return blockSpecialChar(event)" onkeyup="return forceLower(this)"/>
+						</div>
+						</div>
+					</div>`;
+					break;					
 				default:
 					fieldTemplate += `
 					<div class="slds-col" style="${inStyle.style}" id="${inStyle.id}">
