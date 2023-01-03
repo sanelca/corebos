@@ -102,6 +102,10 @@ switch ($_REQUEST['_op']) {
 	case 'setconfiglogall':
 		include_once 'include/integrations/logall/settings.php';
 		break;
+	case 'getconfigfatture':
+	case 'setconfigfatture':
+		include_once 'include/integrations/fatture/settings.php';
+		break;
 	case 'getconfigloginsync':
 	case 'setconfigloginsync':
 		include_once 'include/integrations/loginsync/settings.php';
@@ -213,6 +217,12 @@ switch ($_REQUEST['_op']) {
 				'title' => getTranslatedString('LogAll Activation', 'Utilities'),
 				'desc' => getTranslatedString('LogAll_Desc', 'Utilities'),
 				'url' => 'index.php?action=integration&module=Utilities&_op=getconfiglogall',
+			),
+			array(
+				'abbr' => 'Fatture',
+				'title' => getTranslatedString('Fatture Activation', 'Utilities'),
+				'desc' => getTranslatedString('Fatture integration', 'Utilities'),
+				'url' => 'index.php?action=integration&module=Utilities&_op=getconfigfatture',
 			),
 			array(
 				'abbr' => 'DM',
